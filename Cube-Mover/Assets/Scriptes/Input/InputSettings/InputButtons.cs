@@ -13,7 +13,7 @@ public class InputButtons : InputSettings
     {
         float horizontalDirection = DirectionOppositeButtons(buttonRight, buttonLeft);
         float verticalDirection = DirectionOppositeButtons(buttonUp, buttonDown);
-        return new Vector3(horizontalDirection, 0f, verticalDirection);
+        return new Vector3(horizontalDirection, 0f, verticalDirection).normalized;
     }
 
     private float DirectionOppositeButtons(UIButtonInfo one, UIButtonInfo two)

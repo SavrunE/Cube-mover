@@ -6,6 +6,6 @@ public class InputAxis : InputSettings
 {
     public override Vector3 Direction()
     {
-        return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
     }
 }

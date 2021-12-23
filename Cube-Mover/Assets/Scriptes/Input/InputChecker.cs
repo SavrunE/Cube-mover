@@ -10,7 +10,7 @@ public class InputChecker : MonoBehaviour
     private DelayController delayController;
     private SmoothMover mover;
     private InputSettings inputSettings;
-
+    private Vector3 direction;
 
     private void OnEnable()
     {
@@ -28,7 +28,7 @@ public class InputChecker : MonoBehaviour
 
     private void CheckInput(float delay)
     {
-        Vector3 direction = inputSettings.Direction();
+        direction = inputSettings.Direction();
 
         if (direction != Vector3.zero)
         {

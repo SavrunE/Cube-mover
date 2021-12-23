@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,13 @@ public class SmoothMover : MonoBehaviour, IMoveble
 {
     [SerializeField] float speed;
     [SerializeField] Collider thisCollider;
+
+    public Action OnMoving;
+
     public void MoveTo(Vector3 direction, float delay)
     {
+        OnMoving?.Invoke();
+
         Vector3 thisPosition = this.transform.position;
         Vector3 endPosition = thisPosition + direction * speed * delay;
 
@@ -19,13 +25,12 @@ public class SmoothMover : MonoBehaviour, IMoveble
     private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float time)
     {
         float currTime = 0;
-        do
+        while (currTime <= time)
         {
             this.transform.position = Vector3.Lerp(startPosition, endPosition, currTime / time);
             currTime += Time.deltaTime;
             yield return null;
         }
-        while (currTime <= time);
         this.transform.position = thisCollider.transform.position;
     }
 }
