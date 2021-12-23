@@ -5,12 +5,15 @@ using UnityEngine;
 public class SmoothMover : MonoBehaviour, IMoveble
 {
     [SerializeField] float speed;
+    [SerializeField] Collider thisCollider;
     public void MoveTo(Vector3 direction, float delay)
     {
         Vector3 thisPosition = this.transform.position;
         Vector3 endPosition = thisPosition + direction * speed * delay;
 
         StartCoroutine(SmoothMove(thisPosition, endPosition, delay));
+
+        thisCollider.transform.position = thisCollider.transform.position + direction * speed * delay;
     }
 
     private IEnumerator SmoothMove(Vector3 startPosition, Vector3 endPosition, float time)
@@ -23,5 +26,6 @@ public class SmoothMover : MonoBehaviour, IMoveble
             yield return null;
         }
         while (currTime <= time);
+        this.transform.position = thisCollider.transform.position;
     }
 }
