@@ -6,13 +6,12 @@ using UnityEngine;
 public class DelayController : MonoBehaviour
 {
     [SerializeField] private float delayValue;
-    private Coroutine coroutine;
 
     public Action<float> OnDelayTick;
 
     private void Start()
     {
-        coroutine = StartCoroutine(Delayer());
+        StartCoroutine(Delayer());
     }
 
     private IEnumerator Delayer()
